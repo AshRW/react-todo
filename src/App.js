@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { uuid } from './random'
 import TodoList from './TodoList'
+import './App.css'
 
 const STORAGE_KEY ='todos'
 
@@ -44,17 +45,19 @@ function App() {
 
   return (
     <>
-      <h2>Todos</h2>
-      <TodoList todos={todos.filter(item=>!item.completed)} toggleTodo={toggleTodo}/>
-      <form onSubmit={addTodo}>
-      <input type="text" name="addTodoInput"/>
-      <button type='submit'>Add Todo</button>
-      </form>
-      <button onClick={clearTodos}>Clear Completed Todos</button>
-      <div>{todos.filter(item=>!item.completed).length} todo left</div>
-      <hr />
-      <h2>Completed Todos</h2>
-      <TodoList todos={todos.filter(item=>item.completed)} toggleTodo={toggleTodo}/>
+      <div className='card'>
+          <h2>Your Todos</h2>
+          <TodoList todos={todos.filter(item=>!item.completed)} toggleTodo={toggleTodo}/>
+          <TodoList todos={todos.filter(item=>item.completed)} toggleTodo={toggleTodo}/>
+          <hr/>
+          <form onSubmit={addTodo}>
+          <div className='leftTodos'>{todos.filter(item=>!item.completed).length} todo left</div>
+          <input className="addTodo" type="text" name="addTodoInput" placeholder="Add todos by typing here and hit Enter" />
+          {/* <button type='submit'>Add Todo</button> */}
+          </form>
+          <button className="clearTodo" onClick={clearTodos}>Delete Completed Todos</button>
+          {/* <h2>Completed Todos</h2> */}
+      </div>
     </>
   )
 }
